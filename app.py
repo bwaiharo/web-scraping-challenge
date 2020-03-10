@@ -1,4 +1,5 @@
 from flask_pymongo import PyMongo
+import os
 import mission_to_mars
 from flask import (
     Flask,
@@ -9,8 +10,9 @@ from flask import (
 
 app = Flask(__name__)
 
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or DB_URL
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mission_mars"
+app.config["MONGO_URI"] =  os.environ.get('DATABASE_URL', '') or "mongodb://localhost:27017/mission_mars"
 mongo = PyMongo(app)
 
 # Or set inline
